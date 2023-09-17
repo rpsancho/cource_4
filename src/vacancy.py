@@ -6,8 +6,14 @@ class Vacancy:
         if payment is None:
             payment = 0
         self.payment = payment
-        self.description = description
-        self.requirements = requirements
+        if description is None:
+            self.description = ''
+        else:
+            self.description = description
+        if requirements is None:
+            self.requirements = ''
+        else:
+            self.requirements = requirements
 
     def __lt__(self, other):
         return self.payment < other.payment

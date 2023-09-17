@@ -2,6 +2,7 @@ from src.head_hunter_api import HeadHunterAPI
 from src.super_job_api import SuperJobAPI
 from src.json_file_manager import JSONFileManager
 from src.vacancy import Vacancy
+from src.utils import is_string_in_dict
 
 
 def main():
@@ -55,9 +56,15 @@ def main():
             for vac in sorted_vacancies:
                 print(f"{vac['title']}  {vac['payment']}  {vac['url']}")
         elif user_input == '2':
-            input(f'введите ключевое слово:\n')
+            vac_list = saver.get_vacancies_from_json_file()
+            user_input = input(f'введите ключевое слово:\n')
             user_input = user_input.strip()
-            pass
+            filtered_vacancies = [item for item in vac_list if is_string_in_dict(user_input, item)]
+            for vac in filtered_vacancies:
+                print(f"{vac['title']}  {vac['payment']}  {vac['url']}")
+        else:
+            print(f'непонятно')
+        return
 
 
 if __name__ == '__main__':

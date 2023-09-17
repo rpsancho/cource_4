@@ -3,6 +3,8 @@ class Vacancy:
     def __init__(self, title: str, url: str, payment: int, description: str, requirements: str):
         self.title = title
         self.url = url
+        if payment is None:
+            payment = 0
         self.payment = payment
         self.description = description
         self.requirements = requirements

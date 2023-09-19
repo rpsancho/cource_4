@@ -22,6 +22,21 @@ class JSONFileManager(AbstractJSON):
                 lst.append(item.__dict__)
             json.dump(lst, f, ensure_ascii=False, indent=4)
 
+    def save_vacancy_to_json_file(self, item: object):
+
+        if not os.path.exists(JSONFileManager.file_path):
+            mode = 'x'
+        else:
+            mode = 'w'
+        try:
+            lst = self.get_vacancies_from_json_file()
+        except json.decoder.JSONDecodeError:
+            lst = []
+
+        with open(JSONFileManager.file_path, mode, encoding='UTF-8') as f:
+            lst.append(item.__dict__)
+            json.dump(lst, f, ensure_ascii=False, indent=4)
+
     def get_vacancies_from_json_file(self) -> list:
 
         if not os.path.exists(JSONFileManager.file_path):

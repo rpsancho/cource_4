@@ -5,7 +5,7 @@ from src.json_file_manager import JSONFileManager
 messages = {
     'search_msg': 'Список вакансий получен',
     'filter_msg': 'Вакансии отфильтрованы по ключевому слову',
-    'sort_msg': 'Вакансии отфильтрованы по ключевому слову'
+    'sort_msg': 'Вакансии отсортированы по зарплате'
 }
 
 

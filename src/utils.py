@@ -114,14 +114,20 @@ def add_vacancy_to_file(vacancy_list: list):
     if not vacancy_list:
         print('Результаты поиска отсутствуют. Сначала произведите поиск\n')
         return
-    pos = input(f'Введите номер сохраняемой вакансии\n').strip()
-    pos = int(pos)
-    saver = JSONFileManager()
+
     try:
+        pos = int(input(f'Введите номер сохраняемой вакансии\n').strip())
+    except ValueError:
+        print('Некорректный номер')
+        return
+
+    try:
+        saver = JSONFileManager()
         saver.save_vacancy_to_json_file(vacancy_list[pos])
         print('Вакансия сохранена')
     except IndexError:
         print('Некорректный номер')
+        return
 
 
 def show_vacancies_from_file(*args):
@@ -141,10 +147,16 @@ def del_vacancy_from_file(*args):
         print('Файл пустой\n')
         return
     else:
-        pos = int(input(f'Введите номер удаляемой вакансии\n').strip())
+        try:
+            pos = int(input(f'Введите номер удаляемой вакансии\n').strip())
+        except ValueError:
+            print('Некорректный номер')
+            return
+
         try:
             manager.del_vacancy_from_json_file(pos)
             user_confirmation(messages['del_msg'], show_vacancies_from_file, None)
         except IndexError:
             print('Некорректный номер')
+            return
 

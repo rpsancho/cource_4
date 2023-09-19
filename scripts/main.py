@@ -1,4 +1,4 @@
-from src.utils import search_vacancies, filter_vacancies, sort_vacancies, add_vacancy_to_file
+from src.utils import *
 
 
 def main():
@@ -6,11 +6,7 @@ def main():
     vacancy_list = []
 
     while True:
-        print("1 - поиск вакансий\n"
-              "2 - фильтрация по ключевому слову\n"
-              "3 - сортировка по зарплате\n"
-              "4 - сохранение в файл\n"
-              "5 - выход")
+        show_menu(main_menu)
 
         user_cmd = input().strip()
 
@@ -23,6 +19,10 @@ def main():
         elif user_cmd == '4':
             add_vacancy_to_file(vacancy_list)
         elif user_cmd == '5':
+            show_vacancies_from_file()
+        elif user_cmd == '6':
+            del_vacancy_from_file()
+        elif user_cmd == '7':
             return
         else:
             print('Неизвестная команда\n')

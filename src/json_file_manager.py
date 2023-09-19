@@ -1,6 +1,7 @@
 import os.path
 import json
 from src.abstract_json import AbstractJSON
+from src.vacancy import Vacancy
 
 
 class JSONFileManager(AbstractJSON):
@@ -11,7 +12,6 @@ class JSONFileManager(AbstractJSON):
         pass
 
     def save_vacancies_to_json_file(self, items: list):
-
         if self.file_exist():
             mode = 'w'
         else:
@@ -23,7 +23,6 @@ class JSONFileManager(AbstractJSON):
             json.dump(lst, f, ensure_ascii=False, indent=4)
 
     def save_vacancy_to_json_file(self, item: object):
-
         lst = self.get_vacancies_from_json_file()
         lst.append(item.__dict__)
 
@@ -36,7 +35,6 @@ class JSONFileManager(AbstractJSON):
             json.dump(lst, f, ensure_ascii=False, indent=4)
 
     def get_vacancies_from_json_file(self) -> list:
-
         if self.file_exist():
             if self.file_empty():
                 return []
@@ -47,6 +45,22 @@ class JSONFileManager(AbstractJSON):
         else:
             return []
 
+    def del_vacancy_from_json_file(self, pos):
+        vacancy_list = self.get_vacancies_from_json_file()
+        vacancy_list.pop(pos)
+        out_list = []
+        for item in vacancy_list:
+            vacancy = Vacancy(
+                item['title'],
+                item['url'],
+                item['payment'],
+                item['description'],
+                item['requirements'],
+                item['platform']
+            )
+            out_list.append(vacancy)
+        self.save_vacancies_to_json_file(out_list)
+
     def file_exist(self) -> bool:
         return os.path.exists(JSONFileManager.file_path)
 
@@ -55,8 +69,3 @@ class JSONFileManager(AbstractJSON):
             return True
         else:
             return False
-
-
-j = JSONFileManager()
-print(j.file_exist())
-print(j.file_empty())

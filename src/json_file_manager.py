@@ -6,7 +6,8 @@ from src.vacancy import Vacancy
 
 class JSONFileManager(AbstractJSON):
 
-    file_path = os.path.join('..', 'data', 'search_results.json')
+    abs_path = os.path.abspath('.')
+    file_path = os.path.join(abs_path, 'data', 'search_results.json')
 
     def __init__(self):
         pass

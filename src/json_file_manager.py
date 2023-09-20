@@ -7,10 +7,12 @@ from src.vacancy import Vacancy
 class JSONFileManager(AbstractJSON):
 
     abs_path = os.path.abspath('.')
-    file_path = os.path.join(abs_path, 'data', 'search_results.json')
+    file_dir = os.path.join(abs_path, 'data')
+    file_path = os.path.join(file_dir, 'search_results.json')
 
     def __init__(self):
-        pass
+        if not os.path.exists(JSONFileManager.file_dir):
+            os.mkdir(JSONFileManager.file_dir)
 
     def save_vacancies_to_json_file(self, items: list):
         if self.file_exist():

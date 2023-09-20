@@ -14,4 +14,9 @@
 
 ## Установка ##
 
-...
+1. Установить пакетный менеджер Poetry:
+https://python-poetry.org/docs/#installation
+2. В командной строке перейти в директорию проекта
+3. Выполнить `poetry install`
+4. Выполнить `poetry shell`
+5. Выполнить `poetry run python -m scripts.main`
